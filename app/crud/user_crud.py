@@ -11,6 +11,9 @@ async def get_users(db: Session):
 async def get_user(db: Session, username: str):
     return db.query(userModels.User).filter(userModels.User.username == username).first()
 
+async def get_user_by_id(db: Session, id: int):
+    return db.query(userModels.User).filter(userModels.User.id == id).first()
+
 async def create_user(db: Session, user: userModels.User):
     db_user = userModels.User(username=user.username, hashed_password=bcrypt.hash(user.password))
     db.add(db_user)
@@ -20,7 +23,7 @@ async def create_user(db: Session, user: userModels.User):
 
 async def authenticate_user(db:Session, username: str, password: str):
     user = await get_user(db, username)
-
+    print(user)
     if not user:
         return False
     

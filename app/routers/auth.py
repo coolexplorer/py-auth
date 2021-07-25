@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 
 import crud.user_crud as user_crud
 import schemas.user as userSchema
+import schemas.token as tokenSchema
 from dependencies.database import get_db
 from utils.sqlalchemy import object_as_dict
 
@@ -18,6 +19,7 @@ router = APIRouter(tags=['auth'])
 
 # FastAPI security
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token/test')
+
 
 @router.post('/login', response_model=userSchema.User)
 @version(1)
@@ -29,9 +31,8 @@ async def login(userIn: userSchema.UserIn, db: Session = Depends(get_db)):
 
     return user
 
-@router.post('/token')
-@version(1)
-async def generate_token(userIn: userSchema.UserIn, db: Session = Depends(get_db)):
+
+async def get_generate_token(userIn, db: Session):
     user = await user_crud.authenticate_user(db, userIn.username, userIn.password)
 
     if not user:
@@ -39,19 +40,20 @@ async def generate_token(userIn: userSchema.UserIn, db: Session = Depends(get_db
 
     token = jwt.encode(object_as_dict(user), JWT_SECRET)
 
-    return { 'access_token': token, 'token_type': 'bearer' }
+    return tokenSchema.Token(access_token=token, token_type='bearer')
+
+
+@router.post('/token')
+@version(1)
+async def generate_token(userIn: userSchema.UserIn, db: Session = Depends(get_db)):
+    return await get_generate_token(userIn, db)
+
 
 @router.post('/token/test')
 @version(1)
-async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    user = await user_crud.authenticate_user(db, form_data.username, form_data.password)
+async def generate_test_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    return await get_generate_token(form_data, db)
 
-    if not user:
-        return { 'error': 'invalid credentials' }
-
-    token = jwt.encode(object_as_dict(user), JWT_SECRET)
-
-    return { 'access_token': token, 'token_type': 'bearer' }
 
 @router.get('/user', response_model=userSchema.User)
 @version(1)

@@ -23,7 +23,7 @@ async def create_user(db: Session, user: userModels.User):
 
 async def authenticate_user(db:Session, username: str, password: str):
     user = await get_user(db, username)
-    print(user)
+
     if not user:
         return False
     

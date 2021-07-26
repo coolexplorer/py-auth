@@ -7,9 +7,11 @@ class UserBase(BaseModel):
 
 class UserIn(UserBase):
     password: str
+    email: str
 
 class User(UserBase):
     hashed_password: str
+    email: str
 
     class Config:
         orm_mode = True

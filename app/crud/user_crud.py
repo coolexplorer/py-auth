@@ -2,9 +2,9 @@ from sqlalchemy import schema
 from sqlalchemy.orm import Session
 from passlib.hash import bcrypt
 
-import app.models.user as userModels
-import app.schemas.user as userSchema
-from app.utils.logger import logger
+import models.user as userModels
+import schemas.user as userSchema
+from utils.logger import logger
 
 async def get_users(db: Session):
     return db.query(userModels.User).all()

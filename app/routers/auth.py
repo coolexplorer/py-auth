@@ -7,11 +7,11 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy import schema
 from sqlalchemy.orm import Session
 
-import app.crud.user_crud as user_crud
-import app.schemas.user as userSchema
-import app.schemas.token as tokenSchema
-from app.dependencies.database import get_db
-from app.utils.sqlalchemy import object_as_dict
+import crud.user_crud as user_crud
+import schemas.user as userSchema
+import schemas.token as tokenSchema
+from dependencies.database import get_db
+from utils.sqlalchemy import object_as_dict
 
 JWT_SECRET = 'mysecret'
 logger = logging.getLogger(__name__)

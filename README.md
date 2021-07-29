@@ -1,3 +1,6 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/coolexplorer/py-auth/badge)](https://www.codefactor.io/repository/github/coolexplorer/py-auth)
+
+
 # py-auth
 Authentication service made by Python
 

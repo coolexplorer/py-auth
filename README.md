@@ -1,3 +1,5 @@
+[![dockeri.co](https://dockeri.co/image/coolexplorer/py-auth)](https://hub.docker.com/r/coolexplorer/py-auth)
+
 [![CodeFactor](https://www.codefactor.io/repository/github/coolexplorer/py-auth/badge)](https://www.codefactor.io/repository/github/coolexplorer/py-auth)
 
 

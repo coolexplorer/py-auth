@@ -3,8 +3,8 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi_versioning import VersionedFastAPI
 
-from app.routers import root, auth
-from app.databases.database import engine, Base
+from routers import root, auth
+from databases.database import engine, Base
 
 app = FastAPI(
     title='py-auth',

@@ -2,8 +2,9 @@ from sqlalchemy import schema
 from sqlalchemy.orm import Session
 from passlib.hash import bcrypt
 
-import models.user as userModels
-from utils.logger import logger
+import app.models.user as userModels
+import app.schemas.user as userSchema
+from app.utils.logger import logger
 
 async def get_users(db: Session):
     return db.query(userModels.User).all()
@@ -11,8 +12,11 @@ async def get_users(db: Session):
 async def get_user(db: Session, username: str):
     return db.query(userModels.User).filter(userModels.User.username == username).first()
 
-async def create_user(db: Session, user: userModels.User):
-    db_user = userModels.User(username=user.username, hashed_password=bcrypt.hash(user.password))
+async def get_user_by_id(db: Session, id: int):
+    return db.query(userModels.User).filter(userModels.User.id == id).first()
+
+async def create_user(db: Session, user: userSchema.UserIn):
+    db_user = userModels.User(username=user.username, hashed_password=bcrypt.hash(user.password), email=user.email)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

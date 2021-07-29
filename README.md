@@ -1,5 +1,7 @@
 [![dockeri.co](https://dockeri.co/image/coolexplorer/py-auth)](https://hub.docker.com/r/coolexplorer/py-auth)
 
+[![Python package](https://github.com/coolexplorer/py-auth/actions/workflows/python-package.yml/badge.svg)](https://github.com/coolexplorer/py-auth/actions/workflows/python-package.yml)
+[![docker](https://github.com/coolexplorer/py-auth/actions/workflows/docker.yml/badge.svg)](https://github.com/coolexplorer/py-auth/actions/workflows/docker.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/coolexplorer/py-auth/badge)](https://www.codefactor.io/repository/github/coolexplorer/py-auth)
 
 

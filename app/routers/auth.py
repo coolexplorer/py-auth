@@ -13,7 +13,7 @@ import schemas.token as tokenSchema
 from dependencies.database import get_db
 from utils.sqlalchemy import object_as_dict
 
-JWT_SECRET = 'mysecret'
+JWT_SECRET = 'yourownsecret'
 logger = logging.getLogger(__name__)
 router = APIRouter(tags=['auth'])
 
@@ -68,3 +68,20 @@ async def get_user(token: str = Depends(oauth2_scheme), db: Session = Depends(ge
         )
     
     return user
+
+@router.get('/token/validate')
+@version(1)
+async def validate_token(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    try:
+        payload = jwt.decode(token, JWT_SECRET, algorithms=['HS256'])
+        user = await user_crud.get_user_by_id(db, id=payload.get('id'))
+
+        if not user:
+            raise 
+    except:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail='Token is invalid.'
+        )
+
+    return {'result': True}

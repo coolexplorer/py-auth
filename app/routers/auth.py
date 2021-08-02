@@ -24,10 +24,12 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token/test')
 @router.post('/login', response_model=userSchema.User)
 @version(1)
 async def login(userIn: userSchema.UserIn, db: Session = Depends(get_db)):
-    user = await user_crud.get_user(db, userIn.username)
+    user = await user_crud.get_user(db, userIn.email)
 
     if not user:
         user = await user_crud.create_user(db, userIn)
+    else:
+        user = await user_crud.update_user(db, user)
 
     return user
 

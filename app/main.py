@@ -3,6 +3,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi_versioning import VersionedFastAPI
 
+from config import config
 from routers import root, auth
 from databases.database import engine, Base
 
@@ -10,6 +11,9 @@ app = FastAPI(
     title='py-auth',
     description='Authentication service made by Python'
 )
+
+# Config
+config = config.Settings()
 
 # database
 Base.metadata.create_all(bind=engine)

@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session
 import crud.user_crud as user_crud
 import schemas.user as userSchema
 import schemas.token as tokenSchema
+import schemas.base_response as baseResponseSchema
 from config import config
 from dependencies.database import get_db
 from utils.sqlalchemy import object_as_dict
@@ -108,4 +109,4 @@ async def validate_token(token: str = Depends(oauth2_scheme), db: Session = Depe
             detail='Token is invalid.'
         )
 
-    return {'result': True}
+    return baseResponseSchema.BaseResponse(result=True)

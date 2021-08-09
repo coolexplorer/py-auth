@@ -9,6 +9,14 @@ class UserBase(BaseModel):
 class UserIn(UserBase):
     password: str
 
+    class Config:
+        schema_extra = {
+            "example" : {
+                "email": "example@email.com",
+                "password": "weakpassword",
+            }
+        }
+
 class User(UserBase):
     hashed_password: str
     create_date: datetime

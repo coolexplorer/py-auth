@@ -13,7 +13,7 @@ app = FastAPI(
 )
 
 # Config
-config = config.Settings()
+configuration = config.Settings()
 
 # database
 Base.metadata.create_all(bind=engine)

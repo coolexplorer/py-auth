@@ -4,9 +4,9 @@ from sqlalchemy.orm import sessionmaker
 
 from config import config
 
-config = config.Settings()
+configuration = config.Settings()
 
-SQLALCHEMY_DATABASE_URL = config.database_url
+SQLALCHEMY_DATABASE_URL = configuration.database_url
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}

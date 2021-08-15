@@ -10,7 +10,8 @@ class Settings(BaseSettings):
     # Postgresql = "postgresql://user:password@postgresserver/db"
     database_url: str = os.getenv("DATABASE_URL", "sqlite:///./sql_app.db")
     token_expired_time: int = int(os.getenv("TOKEN_EXPIRED_TIME", "6000"))
-
+    jwt_algorithm: str = os.getenv("JWT_ALGORITHM", "HS256")
+    jwt_secret: str = os.getenv("JWT_SECRET", "yourownsecret")
 
 @lru_cache
 def get_settings() -> BaseSettings:

@@ -19,6 +19,7 @@ class UserIn(UserBase):
 
 class User(UserBase):
     hashed_password: str
+    session_id: str
     create_date: datetime
     last_login: datetime
 

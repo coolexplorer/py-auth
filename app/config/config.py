@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     jwt_algorithm: str = os.getenv("JWT_ALGORITHM", "HS256")
     jwt_secret: str = os.getenv("JWT_SECRET", "yourownsecret")
 
-@lru_cache
+@lru_cache(maxsize = 128)
 def get_settings() -> BaseSettings:
     logger.info('Loading configurations from environment')
     return Settings()

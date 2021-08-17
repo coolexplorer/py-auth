@@ -15,4 +15,4 @@ async def test_ping():
     async with AsyncClient(app=app, base_url="http://test") as ac:
         response = await ac.get("/v1/ping")
     assert response.status_code == 200
-    assert json.dumps(eval(response.text)) == json.dumps(base_response_schema.BaseResponse(result=True))
+    assert json.dumps(response.json()) == base_response_schema.BaseResponse(result=True).json()

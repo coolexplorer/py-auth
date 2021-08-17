@@ -1,3 +1,4 @@
+import uuid
 from sqlalchemy import schema
 from sqlalchemy.orm import Session
 from passlib.hash import bcrypt
@@ -19,7 +20,8 @@ async def get_user_by_id(db: Session, id: int):
 async def create_user(db: Session, user: userSchema.UserIn):
     db_user = userModels.User(
         email=user.email, 
-        hashed_password=bcrypt.hash(user.password), 
+        hashed_password=bcrypt.hash(user.password),
+        session_id=str(uuid.uuid4()), 
         create_date=datetime.utcnow(),
         last_login=datetime.utcnow()
     )

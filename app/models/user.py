@@ -9,6 +9,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     email = Column(String, unique=True, nullable=True)
     hashed_password = Column(String)
+    session_id = Column(String)
     create_date = Column(DateTime, default=datetime.utcnow())
     last_login = Column(DateTime, default=datetime.utcnow())
 
